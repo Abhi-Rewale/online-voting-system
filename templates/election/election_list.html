@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Active Elections{% endblock %}
+{% block content %}
+  <h2>Active Elections</h2>
+  {% if elections %}
+    <ul class="list-group">
+      {% for election in elections %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          {{ election.title }}
+          <a href="{% url 'election_detail' election.id %}" class="btn btn-sm btn-primary">Vote</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No active elections.</p>
+  {% endif %}
+{% endblock %}

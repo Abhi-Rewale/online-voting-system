@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+  <div class="card shadow p-4">
+    <h2 class="mb-3">Welcome, {{ request.user.full_name }} 👋</h2>
+    <p class="lead">You're logged into the Online Voting System.</p>
+
+    <a href="{% url 'election_list' %}" class="btn btn-primary mt-3">Go to Elections</a>
+    
+    <a href="{% url 'logout' %}" class="btn btn-danger mt-3 ms-2">Logout</a>
+  </div>
+{% endblock %}

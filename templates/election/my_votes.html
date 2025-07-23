@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 class="mb-4 text-center">🗳️ My Voting History</h2>
+
+  {% if user_votes %}
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      {% for vote in user_votes %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">{{ vote.election.title }}</h5>
+              <p class="card-text">
+                You voted for <strong class="text-success">{{ vote.candidate.name }}</strong><br>
+                <small class="text-muted">on {{ vote.voted_at|date:"d M Y, H:i" }}</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info text-center mt-4">You haven’t voted in any election yet.</div>
+  {% endif %}
+{% endblock %}

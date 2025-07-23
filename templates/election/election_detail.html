@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}{{ election.title }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h2>{{ election.title }}</h2>
+  <p class="text-muted">{{ election.bio }}</p>
+
+  <!-- ✅ Flash Messages -->
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- ✅ Show vote form or already voted message -->
+  {% if not user_has_voted %}
+    <form method="post" action="{% url 'vote' election.id %}">
+      {% csrf_token %}
+      <div class="row">
+        {% for candidate in candidates %}
+          <div class="col-md-4 mb-4">
+            <label for="cand{{ candidate.id }}" class="card h-100 shadow-sm text-center" style="cursor: pointer;">
+              
+              {% if candidate.photo %}
+                <img src="{{ candidate.photo.url }}" 
+                     class="card-img-top p-3" 
+                     style="height: 250px; object-fit: contain; background-color: #f8f9fa;" 
+                     alt="Candidate Photo">
+              {% endif %}
+
+              <div class="card-body">
+                <h5 class="card-title">{{ candidate.name }}</h5>
+
+                {% if candidate.bio %}
+                  <p class="card-text text-muted">{{ candidate.bio }}</p>
+                {% else %}
+                  <p class="text-muted">No bio provided.</p>
+                {% endif %}
+
+                <input class="form-check-input mt-2" type="radio" name="candidate" id="cand{{ candidate.id }}" value="{{ candidate.id }}">
+              </div>
+            </label>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-success">🗳️ Submit Vote</button>
+        <a href="{% url 'election_list' %}" class="btn btn-secondary">⬅ Back to Elections</a>
+      </div>
+    </form>
+  {% else %}
+    <div class="alert alert-success mt-4">
+      ✅ You have already voted in this election.
+      <a href="{% url 'election_results' election.id %}" class="btn btn-success mt-3">View Results</a>
+    </div>
+    <a href="{% url 'election_list' %}" class="btn btn-secondary mt-3">⬅ Back to Elections</a>
+  {% endif %}
+</div>
+{% endblock %}
