@@ -28,12 +28,6 @@ A secure and user-friendly web app where users can register, vote, and view real
 
 ---
 
-## 📸 Screenshots
-
-> *(Add screenshots in your GitHub repo later: login, vote page, chart view, admin panel)*
-
----
-
 ## 🛠️ Setup Instructions
 
 ### 🔧 Prerequisites
