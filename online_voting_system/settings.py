@@ -69,7 +69,7 @@ WSGI_APPLICATION = 'online_voting_system.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # or 'django.db.backends.mysql' if mysqlclient
-        'NAME': 'voting_db',
+        'NAME': 'onlinevoting',
         'USER': 'root',
         'PASSWORD': 'abhi',
         'HOST': 'localhost',
@@ -119,6 +119,17 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+import os
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

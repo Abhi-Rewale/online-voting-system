@@ -1,17 +1,52 @@
 {% extends 'base.html' %}
-{% block title %}Active Elections{% endblock %}
+{% load static %}
+
+{% block title %}Elections | Online Voting System{% endblock %}
+
 {% block content %}
-  <h2>Active Elections</h2>
-  {% if elections %}
-    <ul class="list-group">
-      {% for election in elections %}
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          {{ election.title }}
-          <a href="{% url 'election_detail' election.id %}" class="btn btn-sm btn-primary">Vote</a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No active elections.</p>
-  {% endif %}
+<div class="container py-5">
+
+  <!-- 🗳️ Header Section -->
+  <div class="text-center mb-5">
+    <h2 class="fw-bold text-primary">
+      <i class="bi bi-megaphone-fill"></i> Active Elections
+    </h2>
+    <p class="text-muted">Participate in ongoing elections and make your vote count.</p>
+  </div>
+
+  <!-- 🧩 Elections List -->
+  <div class="row justify-content-center">
+    {% for election in elections %}
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm border-0 h-100 hover-card">
+          {% if election.banner %}
+            <img src="{{ election.banner.url }}" class="card-img-top" alt="{{ election.title }}" style="height: 220px; object-fit: cover;">
+          {% else %}
+            <img src="{% static 'images/voting-banner.jpg' %}" class="card-img-top" alt="Election Banner" style="height: 220px; object-fit: cover;">
+          {% endif %}
+          <div class="card-body text-center">
+            <h5 class="fw-bold text-primary">{{ election.title }}</h5>
+            {% if election.description %}
+              <p class="text-muted small">{{ election.description|truncatechars:80 }}</p>
+            {% endif %}
+            <a href="{% url 'election_detail' election.id %}" class="btn btn-outline-primary btn-sm">Vote Now</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="text-center mt-5">
+        <img src="{% static 'images/no-election.svg' %}" alt="No Elections" style="max-width: 300px;">
+        <h5 class="text-muted mt-3">No active elections right now.</h5>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .hover-card:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  }
+</style>
 {% endblock %}

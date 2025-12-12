@@ -1,12 +1,87 @@
 {% extends 'base.html' %}
-{% block title %}Dashboard{% endblock %}
-{% block content %}
-  <div class="card shadow p-4">
-    <h2 class="mb-3">Welcome, {{ request.user.full_name }} 👋</h2>
-    <p class="lead">You're logged into the Online Voting System.</p>
+{% load static %}
 
-    <a href="{% url 'election_list' %}" class="btn btn-primary mt-3">Go to Elections</a>
-    
-    <a href="{% url 'logout' %}" class="btn btn-danger mt-3 ms-2">Logout</a>
+{% block title %}Home | Online Voting System{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+
+  <!-- 🖼️ Hero Section -->
+  <div class="hero-section text-center text-white d-flex align-items-center justify-content-center"
+       style="background-image: url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1500&q=80');
+              background-size: cover; background-position: center; height: 60vh; position: relative;">
+    <div class="bg-dark bg-opacity-50 w-100 h-100 position-absolute top-0"></div>
+    <div class="position-relative z-2">
+      <h1 class="fw-bold display-5">🗳️ Online Voting System</h1>
+      <p class="lead">Vote Securely • Instantly • Transparently</p>
+      {% if not user.is_authenticated %}
+        <a href="{% url 'login' %}" class="btn btn-light btn-lg px-4 me-2 mt-3"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+        <a href="{% url 'signup' %}" class="btn btn-outline-light btn-lg px-4 mt-3"><i class="fa-solid fa-user-plus"></i> Sign Up</a>
+      {% else %}
+        <a href="{% url 'election_list' %}" class="btn btn-success btn-lg px-4 mt-3"><i class="fa-solid fa-list-check"></i> View Elections</a>
+        <a href="{% url 'my_votes' %}" class="btn btn-outline-light btn-lg px-4 mt-3"><i class="fa-solid fa-check-to-slot"></i> My Votes</a>
+      {% endif %}
+    </div>
   </div>
+
+  <!-- 🧩 Info Section -->
+  <div class="container my-5">
+    <h2 class="text-center mb-4 fw-bold text-primary">Why Choose Online Voting?</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm border-0 h-100 text-center">
+          <div class="card-body">
+            <i class="fa-solid fa-shield-halved fa-3x text-primary mb-3"></i>
+            <h5 class="fw-bold">Secure & Reliable</h5>
+            <p class="text-muted">Votes are encrypted and stored safely, ensuring transparency and fairness.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm border-0 h-100 text-center">
+          <div class="card-body">
+            <i class="fa-solid fa-bolt fa-3x text-warning mb-3"></i>
+            <h5 class="fw-bold">Fast & Easy</h5>
+            <p class="text-muted">Vote anytime, anywhere with just a few clicks — no queues, no paperwork.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm border-0 h-100 text-center">
+          <div class="card-body">
+            <i class="fa-solid fa-chart-pie fa-3x text-success mb-3"></i>
+            <h5 class="fw-bold">Live Results</h5>
+            <p class="text-muted">See real-time results displayed instantly after every election.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 📖 About Section -->
+    <div class="card shadow-sm border-0 mt-5">
+      <div class="card-body text-center">
+        <h3 class="fw-bold text-primary mb-3">About This Project</h3>
+        <p class="text-muted fs-6">
+          The <b>Online Voting System</b> is built using <b>Django</b> and <b>MySQL</b>. It allows secure, transparent,
+          and fast voting for institutions, organizations, and communities. Each vote is verified, ensuring a fair and modern digital election experience.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Auto Dismiss Flash Messages -->
+<script>
+  setTimeout(function () {
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(alert => {
+      alert.classList.remove('show');
+      alert.classList.add('fade');
+      setTimeout(() => alert.remove(), 500);
+    });
+  }, 3000);
+</script>
+
 {% endblock %}
