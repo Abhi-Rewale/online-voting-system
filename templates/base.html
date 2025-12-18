@@ -71,6 +71,23 @@
          transform: scale(1.1);
         }
 
+        .candidate-img {
+         width: 100%;
+         height: 220px;
+         object-fit: contain;     /* 🔥 KEY FIX */
+         background-color: #f4f6f8;
+         padding: 10px;
+        }
+
+        .card {
+            border-radius: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
     </style>
 </head>
 <body>

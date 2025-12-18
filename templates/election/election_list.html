@@ -4,6 +4,8 @@
 {% block title %}Elections | Online Voting System{% endblock %}
 
 {% block content %}
+<div class="page-bg">
+
 <div class="container py-5">
 
   <!-- 🗳️ Header Section -->
@@ -41,6 +43,7 @@
     {% endfor %}
   </div>
 </div>
+</div>
 
 <style>
   .hover-card:hover {
@@ -48,5 +51,9 @@
     transition: 0.3s;
     box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   }
+  .page-bg {
+        background: linear-gradient(135deg, #f5f9ff, #eef3ff);
+        min-height: 100vh;
+    }
 </style>
 {% endblock %}

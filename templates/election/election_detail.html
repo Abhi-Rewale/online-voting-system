@@ -12,14 +12,14 @@
     <p class="text-muted">{{ election.bio }}</p>
   </div>
 
-  {% if messages %}
+  <!-- {% if messages %}
     {% for message in messages %}
       <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
         {{ message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
       </div>
     {% endfor %}
-  {% endif %}
+  {% endif %} -->
 
   {% if not user_has_voted %}
   <!-- ✅ Voting Form -->
@@ -30,9 +30,12 @@
       <div class="col-md-4 mb-4">
         <div class="card shadow-sm border-0 text-center h-100">
           {% if candidate.photo %}
-          <img src="{{ candidate.photo.url }}" alt="{{ candidate.name }}" class="card-img-top" style="height: 220px; object-fit: cover;">
+<img src="{{ candidate.photo.url }}" 
+     alt="{{ candidate.name }}" 
+     class="card-img-top candidate-img">
           {% else %}
-          <img src="{% static 'images/default-user.jpg' %}" class="card-img-top" style="height: 220px; object-fit: cover;">
+<img src="{% static 'images/default-user.jpg' %}" 
+     class="card-img-top candidate-img">
           {% endif %}
           <div class="card-body">
             <h5 class="fw-bold">{{ candidate.name }}</h5>
